@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NIDS - Network Intrusion Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <canvas id="networkCanvas"></canvas>
+
+    <nav class="navbar">
+        <div class="nav-logo">NIDS <span>Console</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#how-it-works">How It Works</a>
+        </div>
+        <div class="status-bar">
+            <span class="status-dot"></span> MONITORING ACTIVE
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+
+            <div class="hero-text">
+                <h1 id="typingTitle"></h1>
+                <p>Enter an IP address and port to check for suspicious activity.</p>
+            </div>
+
+            <div class="dashboard-row">
+
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Checks</div>
+                        <div class="stat-value" id="totalChecks">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Total Alerts</div>
+                        <div class="stat-value" id="totalAlerts">0</div>
+                    </div>
+                </div>
+
+                <div class="container">
+
+                    <label for="ipInput">IP Address:</label>
+                    <input type="text" id="ipInput" placeholder="e.g. 192.168.2.55">
+
+                    <label for="portInput">Port:</label>
+                    <input type="number" id="portInput" placeholder="e.g. 80">
+
+                    <button id="checkBtn">Check IP</button>
+
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            <span>Requests</span>
+                            <span id="reqProgressText">0 / 5</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="reqProgressFill"></div>
+                        </div>
+
+                        <div class="progress-label">
+                            <span>Unique Ports</span>
+                            <span id="portProgressText">0 / 4</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="portProgressFill"></div>
+                        </div>
+                    </div>
+
+                    <div id="resultBox" class="result-box">
+                        Enter details above and click "Check IP" to see the result.
+                    </div>
+
+                    <button id="resetBtn" class="secondary-btn">Reset All Data</button>
+                </div>
+
+                <div class="log-container">
+                    <h2>
+                        Alert Log
+                        <button id="exportBtn" class="export-btn">Download Log</button>
+                    </h2>
+                    <div id="logBox">
+                        <p class="log-empty">No alerts yet...</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="info-section">
+        <div class="section-tag">UNDER THE HOOD</div>
+        <h2 class="section-title">How NIDS detects intrusions</h2>
+        <p class="section-sub">Two detection rules, applied to every IP and port that comes through the system.</p>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <h3>Request Logging</h3>
+                <p>Every time an IP sends data, its timestamp is recorded in an in-memory log, keyed by IP address.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <h3>DDoS Check</h3>
+                <p>If an IP sends more than 5 requests within a 3 second window, it is flagged as a possible DDoS source.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <h3>Port Tracking</h3>
+                <p>Each unique port an IP touches is added to a set. Repeated ports don't count twice.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <h3>Port Scan Check</h3>
+                <p>If an IP accesses more than 4 different ports, it is flagged as a possible port scanner.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <span>NIDS Simulation Tool &mdash; Educational Project</span>
+        <span>Built by Parth Gajjar &middot; <a href="https://github.com/Parthgajjar-745/Network-Intrusion-Detection-System" target="_blank">github.com/Parthgajjar-745</a></span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
